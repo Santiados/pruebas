@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <style type="text/css">
+
+</style>
+</head>
+<body>
+ <div id="cuerpo">
+   <label for="">Introduce algo que quieras buscar</label><br>
+   <input type="text" id="nombre"><br>
+   <div class="objetos"></div><br>
+   
+ </div>
+
+ <script type="text/javascript">
+  var entrada = document.getElementsByTagName('input')[0];
+  var resultado = document.getElementsByClassName('objetos')[0]; 
+  window.addEventListener('load', iniciar );
+
+  function iniciar(){
+    entrada.addEventListener("keyup",mostrar);
+  }
+
+  function mostrar(e){
+    var valorRespuesta = e.target.value;
+    if(valorRespuesta == ''){
+      resultado.innerHTML = '';
+      return;
+    }else{
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var respuesta = JSON.parse(this.responseText);
+          console.log(respuesta)
+          if(respuesta!=''){
+            resultado.innerHTML = '';
+            var caja = document.createElement('div');
+            var titulo = document.createElement('p');
+            titulo.innerHTML = respuesta.nombre;
+            caja.appendChild(titulo);
+            titulo.innerHTML = respuesta.nombre;
+            var d1 = document.createElement('span');
+            d1.innerHTML = respuesta.capacidad;
+            caja.appendChild(d1);
+            var salto = document.createElement('br');
+            caja.appendChild(salto);
+            var d2 = document.createElement('span');
+            d2.innerHTML = respuesta.ram;
+            caja.appendChild(d2);
+
+            resultado.appendChild(caja);
+          }
+        }else {
+          resultado.innerHTML = 'No hay nada relacionado';
+        }
+      };
+
+      xmlhttp.open('GET', "js/info.json/" + valorRespuesta,true);
+      xmlhttp.send();
+    }
+  }
+
+  
+</script>
+
+</body>
+</html>

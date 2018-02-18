@@ -1,0 +1,17 @@
+{
+	"prod1" : {
+		"nombre" : "einos",
+		"capacidad" : "2gb",
+		"ram" : "3gb"
+	},
+	"prod2" : {
+		"nombre" : "snapdragon",
+		"capacidad" : "2gb",
+		"ram" : "10gb"
+	},
+	"prod3" : {
+		"nombre" : "snapdragon10",
+		"capacidad" : "5gb",
+		"ram" : "100gb"
+	}
+}
